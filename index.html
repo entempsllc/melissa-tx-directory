@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melissa Texas Directory | Your Complete Local Guide to Melissa, TX</title>
+<meta name="description" content="Complete local guide to Melissa, TX. Businesses, schools, emergency contacts, city services, parks, and events for Melissa residents and newcomers.">
+<meta name="keywords" content="Melissa TX, Melissa Texas directory, Melissa Texas businesses, Melissa TX guide, Collin County Texas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #1B6B6B;
+    --teal-dark: #124848;
+    --teal-light: #2A9090;
+    --teal-pale: #E5F3F3;
+    --copper: #B86A2E;
+    --copper-pale: #FBF0E8;
+    --sand: #F7F4EF;
+    --ink: #1C1C1C;
+    --mid: #5C6B6B;
+    --border: #D0DCDC;
+    --white: #FFFFFF;
+    --gold: #C8922A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Raleway', sans-serif; background: var(--sand); color: var(--ink); }
+
+  nav { background: var(--teal-dark); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+  .brand { color: white; font-family: 'Lora', serif; font-size: 1.35rem; padding: 13px 0; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .brand em { font-style: normal; color: var(--copper); }
+  .brand .tag { font-family: 'Space Mono', monospace; font-size: 0.6rem; background: rgba(255,255,255,0.1); padding: 3px 7px; border-radius: 3px; color: rgba(255,255,255,0.7); }
+  .nav-l { display: flex; gap: 3px; }
+  .nav-l a { color: rgba(255,255,255,0.78); text-decoration: none; font-size: 0.8rem; font-weight: 700; padding: 7px 10px; border-radius: 4px; letter-spacing: 0.04em; }
+  .nav-l a:hover { background: rgba(255,255,255,0.1); color: white; }
+
+  .hero { background: var(--teal-dark); color: white; padding: 52px 24px 44px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(27,107,107,0.8) 0%, transparent 70%), url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+  .hero-inner { position: relative; max-width: 760px; margin: 0 auto; }
+  .hero-label { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: var(--copper); text-transform: uppercase; margin-bottom: 14px; }
+  .hero h1 { font-family: 'Lora', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.1; margin-bottom: 14px; font-weight: 600; }
+  .hero h1 span { color: var(--copper); }
+  .hero p { font-size: 0.98rem; color: rgba(255,255,255,0.68); max-width: 500px; margin: 0 auto 28px; line-height: 1.65; font-weight: 300; }
+  .hero-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .hero-badge { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.85); padding: 5px 14px; border-radius: 4px; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.04em; }
+
+  .strip { background: var(--copper); color: white; padding: 9px 24px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; font-size: 0.8rem; font-weight: 700; }
+  .strip a { color: white; text-decoration: none; }
+  .strip a:hover { text-decoration: underline; }
+
+  .ad-bar { background: #EEEBE4; border: 1px dashed #C5BDB0; text-align: center; padding: 18px; font-size: 0.7rem; color: #A8A0A0; }
+
+  .search-sec { background: white; border-bottom: 1px solid var(--border); padding: 22px 24px; }
+  .s-inner { max-width: 660px; margin: 0 auto; }
+  .s-label { font-size: 0.72rem; font-weight: 900; color: var(--teal); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 7px; }
+  .s-row { display: flex; border: 2px solid var(--teal); border-radius: 5px; overflow: hidden; }
+  .s-row input { flex: 1; padding: 11px 14px; font-size: 0.9rem; border: none; outline: none; font-family: 'Raleway', sans-serif; }
+  .s-row button { background: var(--teal); color: white; border: none; padding: 11px 20px; font-weight: 900; cursor: pointer; font-size: 0.82rem; font-family: 'Raleway', sans-serif; letter-spacing: 0.05em; }
+  .s-tags { display: flex; gap: 6px; margin-top: 9px; flex-wrap: wrap; }
+  .s-tags a { font-size: 0.72rem; background: var(--teal-pale); color: var(--teal); padding: 3px 10px; border-radius: 3px; text-decoration: none; font-weight: 700; }
+
+  .main { max-width: 1200px; margin: 0 auto; padding: 28px 24px; display: grid; grid-template-columns: 1fr 285px; gap: 24px; }
+  @media (max-width: 870px) { .main { grid-template-columns: 1fr; } .nav-l { display: none; } }
+
+  .sec { margin-bottom: 28px; }
+  .sec-h { display: flex; align-items: center; gap: 12px; padding-bottom: 8px; margin-bottom: 14px; border-bottom: 3px solid var(--teal); }
+  .sec-h h2 { font-family: 'Lora', serif; font-size: 1.3rem; color: var(--teal-dark); font-weight: 600; }
+  .sec-h .badge { font-family: 'Space Mono', monospace; font-size: 0.62rem; background: var(--teal-pale); color: var(--teal); padding: 2px 7px; border-radius: 2px; }
+
+  .cat-g { display: grid; grid-template-columns: repeat(auto-fill, minmax(125px, 1fr)); gap: 8px; }
+  .cat-item { background: white; border: 1px solid var(--border); border-radius: 5px; padding: 13px 10px; text-align: center; text-decoration: none; color: var(--ink); transition: all 0.15s; }
+  .cat-item:hover { border-color: var(--teal-light); background: var(--teal-pale); }
+  .cat-item .e { font-size: 1.65rem; display: block; margin-bottom: 4px; }
+  .cat-item .n { font-size: 0.74rem; font-weight: 700; display: block; }
+  .cat-item .s { font-size: 0.62rem; color: var(--mid); }
+
+  .biz-stack { display: flex; flex-direction: column; gap: 8px; }
+  .biz-item { background: white; border: 1px solid var(--border); border-radius: 5px; padding: 12px 14px; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .biz-item:hover { border-color: var(--teal-light); }
+  .biz-item .c { font-size: 0.67rem; color: var(--copper); font-weight: 900; text-transform: uppercase; letter-spacing: 0.07em; }
+  .biz-item h3 { font-size: 0.9rem; font-weight: 700; margin: 2px 0; }
+  .biz-item .a { font-size: 0.75rem; color: var(--mid); }
+  .biz-item .p a { font-size: 0.78rem; color: var(--teal); font-weight: 700; text-decoration: none; }
+  .tag-s { font-size: 0.65rem; padding: 3px 8px; border-radius: 3px; font-weight: 700; white-space: nowrap; }
+  .t-teal { background: var(--teal-pale); color: var(--teal-dark); }
+  .t-cop { background: var(--copper-pale); color: #7A3D0F; }
+  .t-grn { background: #E5F5EC; color: #1A5C35; }
+
+  .e-box { background: #FFF4F4; border: 2px solid #FCA5A5; border-radius: 6px; padding: 15px 17px; }
+  .e-box h3 { color: #B91C1C; font-size: 0.9rem; font-weight: 900; margin-bottom: 9px; }
+  .e-g { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .e-num .l { font-size: 0.62rem; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.07em; }
+  .e-num a { font-size: 1.05rem; color: #B91C1C; font-weight: 700; text-decoration: none; font-family: 'Space Mono', monospace; display: block; }
+
+  .tbl { width: 100%; border-collapse: collapse; font-size: 0.79rem; }
+  .tbl th { background: var(--teal-pale); color: var(--teal-dark); text-align: left; padding: 8px 11px; font-weight: 900; font-size: 0.71rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .tbl td { padding: 8px 11px; border-bottom: 1px solid var(--border); }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: var(--teal-pale); }
+  .tbl a { color: var(--copper); text-decoration: none; font-weight: 700; }
+
+  .info-g { display: grid; grid-template-columns: repeat(auto-fill, minmax(235px, 1fr)); gap: 12px; }
+  .icard { background: white; border: 1px solid var(--border); border-radius: 5px; padding: 14px; }
+  .icard h3 { font-size: 0.82rem; font-weight: 900; color: var(--teal); margin-bottom: 10px; display: flex; align-items: center; gap: 5px; letter-spacing: 0.04em; }
+  .icard ul { list-style: none; }
+  .icard ul li { padding: 4px 0; border-bottom: 1px solid var(--teal-pale); font-size: 0.78rem; display: flex; justify-content: space-between; }
+  .icard ul li:last-child { border-bottom: none; }
+  .icard ul li a { color: var(--copper); text-decoration: none; font-weight: 700; }
+  .icard .sm { font-size: 0.72rem; color: var(--mid); }
+
+  .evts { display: flex; flex-direction: column; gap: 8px; }
+  .ev { background: white; border: 1px solid var(--border); border-radius: 5px; padding: 12px; display: flex; gap: 11px; }
+  .ev-d { background: var(--teal); color: white; border-radius: 4px; min-width: 44px; text-align: center; padding: 6px 7px; }
+  .ev-d .m { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.75); }
+  .ev-d .d { font-size: 1.4rem; font-family: 'Lora', serif; line-height: 1; }
+  .ev-info h4 { font-size: 0.84rem; font-weight: 700; margin-bottom: 2px; }
+  .ev-info p { font-size: 0.74rem; color: var(--mid); line-height: 1.4; }
+
+  .sb-c { background: white; border: 1px solid var(--border); border-radius: 5px; padding: 14px; margin-bottom: 12px; }
+  .sb-c h3 { font-size: 0.76rem; font-weight: 900; color: var(--teal-dark); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 2px solid var(--copper); }
+  .sb-c ul { list-style: none; }
+  .sb-c ul li { padding: 4px 0; font-size: 0.78rem; border-bottom: 1px solid var(--teal-pale); }
+  .sb-c ul li:last-child { border-bottom: none; }
+  .sb-c ul li a { color: var(--copper); text-decoration: none; font-weight: 700; }
+  .ad-sb { background: #EDEAE4; border: 1px dashed #C0BBAF; text-align: center; padding: 36px 12px; font-size: 0.68rem; color: #AAA; border-radius: 5px; margin-bottom: 12px; }
+  .map-p { background: var(--teal-pale); border: 1px solid var(--border); border-radius: 5px; height: 185px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+  .map-p .i { font-size: 2rem; }
+  .map-p a { font-size: 0.76rem; color: var(--copper); text-decoration: none; font-weight: 700; }
+
+  footer { background: var(--teal-dark); color: rgba(255,255,255,0.6); padding: 34px 24px 18px; margin-top: 32px; }
+  .ft { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 22px; margin-bottom: 22px; }
+  .fc h4 { color: white; font-size: 0.82rem; font-weight: 900; margin-bottom: 9px; letter-spacing: 0.06em; }
+  .fc ul { list-style: none; }
+  .fc ul li { padding: 3px 0; }
+  .fc ul li a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.77rem; }
+  .fc ul li a:hover { color: var(--copper); }
+  .fb { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; display: flex; justify-content: space-between; font-size: 0.71rem; flex-wrap: wrap; gap: 6px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="brand">📍 <em>Melissa</em>, TX <span class="tag">DIRECTORY</span></a>
+  <div class="nav-l">
+    <a href="#biz">Businesses</a>
+    <a href="#schools">Schools</a>
+    <a href="#health">Healthcare</a>
+    <a href="#events">Events</a>
+    <a href="#city">City Hall</a>
+    <a href="#parks">Parks</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Collin County · DFW Metroplex · ZIP 75454</div>
+    <h1>Your Local Guide to<br><span>Melissa, Texas</span></h1>
+    <p>Melissa's go-to resource for businesses, schools, city services, events, and everything residents need to live, work, and thrive here.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">📈 10% Growth YoY</span>
+      <span class="hero-badge">🏠 ~20,000+ Residents</span>
+      <span class="hero-badge">Collin County</span>
+      <span class="hero-badge">30 Min to Dallas</span>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <a href="https://forecast.weather.gov/MapClick.php?CityName=Melissa&state=TX" target="_blank">🌤️ Melissa Weather</a>
+  <a href="https://www.collincountytx.gov" target="_blank">🏛️ Collin County</a>
+  <a href="https://511tx.org" target="_blank">🚗 TX Traffic Live</a>
+  <a href="https://www.weather.gov/alerts/tx" target="_blank">⚠️ TX Storm Alerts</a>
+  <a href="https://www.dallasnews.com" target="_blank">📰 DFW News</a>
+</div>
+
+<div class="ad-bar">ADVERTISEMENT — 728×90 Leaderboard Ad Unit</div>
+
+<div class="search-sec">
+  <div class="s-inner">
+    <div class="s-label">Find It in Melissa, TX</div>
+    <div class="s-row">
+      <input type="text" placeholder="Restaurants, schools, plumbers, doctors...">
+      <button>Search</button>
+    </div>
+    <div class="s-tags">
+      <a href="#restaurants">Dining</a>
+      <a href="#health">Healthcare</a>
+      <a href="#schools">Schools</a>
+      <a href="#contractors">Home Services</a>
+      <a href="#childcare">Childcare</a>
+      <a href="#auto">Auto</a>
+      <a href="#realestate">Real Estate</a>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+<div class="content">
+
+  <div class="sec">
+    <div class="e-box">
+      <h3>🚨 Emergency & Key Numbers — Melissa, TX</h3>
+      <div class="e-g">
+        <div class="e-num"><span class="l">Emergency</span><a href="tel:911">911</a></div>
+        <div class="e-num"><span class="l">Melissa Police</span><a href="tel:9725428700">(972) 542-8700</a></div>
+        <div class="e-num"><span class="l">Melissa Fire Dept</span><a href="tel:9725428700">(972) 542-8700</a></div>
+        <div class="e-num"><span class="l">Collin Co. Sheriff</span><a href="tel:9724243110">(972) 424-3110</a></div>
+        <div class="e-num"><span class="l">Poison Control</span><a href="tel:18002221222">1-800-222-1222</a></div>
+        <div class="e-num"><span class="l">City Hall</span><a href="tel:9725428100">(972) 542-8100</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" id="biz">
+    <div class="sec-h"><h2>Browse All Categories</h2><span class="badge">MELISSA TX</span></div>
+    <div class="cat-g">
+      <a href="#restaurants" class="cat-item"><span class="e">🍽️</span><span class="n">Restaurants</span><span class="s">Dining & Food</span></a>
+      <a href="#health" class="cat-item"><span class="e">🏥</span><span class="n">Healthcare</span><span class="s">Docs & Clinics</span></a>
+      <a href="#contractors" class="cat-item"><span class="e">🔨</span><span class="n">Home Services</span><span class="s">Contractors</span></a>
+      <a href="#auto" class="cat-item"><span class="e">🔧</span><span class="n">Auto Repair</span><span class="s">Mechanics</span></a>
+      <a href="#childcare" class="cat-item"><span class="e">🧒</span><span class="n">Childcare</span><span class="s">Daycares</span></a>
+      <a href="#realestate" class="cat-item"><span class="e">🏡</span><span class="n">Real Estate</span><span class="s">Buy & Rent</span></a>
+      <a href="#grocery" class="cat-item"><span class="e">🛒</span><span class="n">Grocery</span><span class="s">Food Stores</span></a>
+      <a href="#fitness" class="cat-item"><span class="e">💪</span><span class="n">Fitness</span><span class="s">Gyms</span></a>
+      <a href="#beauty" class="cat-item"><span class="e">💅</span><span class="n">Beauty</span><span class="s">Salons & Spa</span></a>
+      <a href="#pets" class="cat-item"><span class="e">🐾</span><span class="n">Pets</span><span class="s">Vet & Grooming</span></a>
+      <a href="#banking" class="cat-item"><span class="e">🏦</span><span class="n">Banking</span><span class="s">Finance</span></a>
+      <a href="#churches" class="cat-item"><span class="e">⛪</span><span class="n">Churches</span><span class="s">Community</span></a>
+    </div>
+  </div>
+
+  <div class="sec" id="restaurants">
+    <div class="sec-h"><h2>Restaurants & Dining</h2><span class="badge">MELISSA TX</span></div>
+    <div class="biz-stack">
+      <div class="biz-item"><div><div class="c">Tex-Mex</div><h3>El Fenix – Melissa Area</h3><div class="a">📍 US-75, Melissa TX 75454</div><div class="p"><a href="tel:9725423100">(972) 542-3100</a></div></div><span class="tag-s t-cop">$$</span></div>
+      <div class="biz-item"><div><div class="c">American · Fast Food</div><h3>McDonald's Melissa TX</h3><div class="a">📍 N. Outer Loop, Melissa TX 75454</div><div class="p"><a href="tel:9725420200">(972) 542-0200</a></div></div><span class="tag-s t-teal">$</span></div>
+      <div class="biz-item"><div><div class="c">BBQ</div><h3>Smoky Oak Taproom</h3><div class="a">📍 Melissa Town Center, TX 75454</div><div class="p"><a href="tel:9725423300">(972) 542-3300</a></div></div><span class="tag-s t-cop">$$</span></div>
+      <div class="biz-item"><div><div class="c">Pizza · Delivery</div><h3>Pizza Hut Melissa</h3><div class="a">📍 US-75 & Melissa Rd, TX 75454</div><div class="p"><a href="tel:9725420400">(972) 542-0400</a></div></div><span class="tag-s t-teal">$</span></div>
+      <div class="biz-item"><div><div class="c">Coffee · Café</div><h3>Dutch Bros Coffee – Melissa</h3><div class="a">📍 Melissa TX 75454</div><div class="p"><a href="tel:9725420500">(972) 542-0500</a></div></div><span class="tag-s t-teal">$</span></div>
+    </div>
+  </div>
+
+  <div class="ad-bar" style="margin:12px 0; border-radius:5px;">ADVERTISEMENT — 728×90 In-Content</div>
+
+  <div class="sec" id="schools">
+    <div class="sec-h"><h2>Melissa ISD Schools</h2><span class="badge">MELISSA INDEPENDENT SCHOOL DISTRICT</span></div>
+    <table class="tbl">
+      <thead><tr><th>School</th><th>Grades</th><th>Address</th><th>Phone</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://www.melissaisd.org" target="_blank">Melissa High School</a></td><td>9–12</td><td>3000 Cardinal Dr, Melissa TX</td><td><a href="tel:9725422052">(972) 542-2052</a></td></tr>
+        <tr><td><a href="https://www.melissaisd.org" target="_blank">Melissa Ridge Intermediate</a></td><td>5–6</td><td>3800 Cardinal Dr, Melissa TX</td><td><a href="tel:9725422060">(972) 542-2060</a></td></tr>
+        <tr><td><a href="https://www.melissaisd.org" target="_blank">Melissa Middle School</a></td><td>7–8</td><td>3600 Cardinal Dr, Melissa TX</td><td><a href="tel:9725422055">(972) 542-2055</a></td></tr>
+        <tr><td><a href="https://www.melissaisd.org" target="_blank">Harry McKillop Elementary</a></td><td>K–4</td><td>3200 Cardinal Dr, Melissa TX</td><td><a href="tel:9725422058">(972) 542-2058</a></td></tr>
+        <tr><td><a href="https://www.melissaisd.org" target="_blank">Willow Wood Elementary</a></td><td>K–4</td><td>Melissa TX 75454</td><td><a href="tel:9725422059">(972) 542-2059</a></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:8px; font-size:0.75rem; color:var(--mid);">Melissa ISD: <a href="https://www.melissaisd.org" target="_blank" style="color:var(--copper);">melissaisd.org</a> · <a href="tel:9725422050" style="color:var(--copper);">(972) 542-2050</a></p>
+  </div>
+
+  <div class="sec" id="health">
+    <div class="sec-h"><h2>Healthcare & Medical</h2><span class="badge">MELISSA TX AREA</span></div>
+    <div class="biz-stack">
+      <div class="biz-item"><div><div class="c">Hospital · ER</div><h3>Medical City McKinney</h3><div class="a">📍 4500 Medical Center Dr, McKinney (15 min)</div><div class="p"><a href="tel:9725472000">(972) 547-2000</a></div></div><span class="tag-s t-grn">ER</span></div>
+      <div class="biz-item"><div><div class="c">Primary Care</div><h3>Melissa Family Clinic</h3><div class="a">📍 3202 US-75, Melissa TX 75454</div><div class="p"><a href="tel:9725428500">(972) 542-8500</a></div></div><span class="tag-s t-teal">Primary Care</span></div>
+      <div class="biz-item"><div><div class="c">Urgent Care · Walk-In</div><h3>FastMed Urgent Care – McKinney</h3><div class="a">📍 US-75 S, McKinney (nearby)</div><div class="p"><a href="tel:9725425000">(972) 542-5000</a></div></div><span class="tag-s t-cop">Walk-In</span></div>
+      <div class="biz-item"><div><div class="c">Dentist</div><h3>Melissa Dental Associates</h3><div class="a">📍 US-75, Melissa TX 75454</div><div class="p"><a href="tel:9725428600">(972) 542-8600</a></div></div><span class="tag-s t-teal">Dental</span></div>
+    </div>
+  </div>
+
+  <div class="ad-bar" style="margin:12px 0; border-radius:5px;">ADVERTISEMENT — 728×90 In-Content</div>
+
+  <div class="sec" id="city">
+    <div class="sec-h"><h2>City of Melissa Services</h2><span class="badge">GOVERNMENT</span></div>
+    <div class="info-g">
+      <div class="icard">
+        <h3>🏛️ City Hall</h3>
+        <ul>
+          <li><span>Address</span><span class="sm">3411 Barker Ave, Melissa TX 75454</span></li>
+          <li><span>Phone</span><a href="tel:9725428100">(972) 542-8100</a></li>
+          <li><span>Website</span><a href="https://www.cityofmelissa.com" target="_blank">cityofmelissa.com</a></li>
+          <li><span>Hours</span><span class="sm">Mon–Fri 8am–5pm</span></li>
+        </ul>
+      </div>
+      <div class="icard">
+        <h3>💧 Utilities</h3>
+        <ul>
+          <li><span>Water/Sewer</span><a href="tel:9725428100">(972) 542-8100</a></li>
+          <li><span>Oncor Electric</span><a href="tel:8888336552">888-833-6552</a></li>
+          <li><span>Atmos Gas</span><a href="tel:8882866700">888-286-6700</a></li>
+          <li><span>Trash/Recycle</span><a href="https://www.cityofmelissa.com" target="_blank">City Portal</a></li>
+        </ul>
+      </div>
+      <div class="icard">
+        <h3>📋 Permits & Zoning</h3>
+        <ul>
+          <li><span>Building Permits</span><a href="https://www.cityofmelissa.com" target="_blank">Online Portal</a></li>
+          <li><span>Planning Dept</span><a href="tel:9725428100">(972) 542-8100</a></li>
+          <li><span>Business License</span><a href="https://www.cityofmelissa.com" target="_blank">City Site</a></li>
+          <li><span>Code Enforcement</span><a href="tel:9725428100">(972) 542-8100</a></li>
+        </ul>
+      </div>
+      <div class="icard">
+        <h3>📬 Collin County</h3>
+        <ul>
+          <li><span>County Website</span><a href="https://www.collincountytx.gov" target="_blank">collincountytx.gov</a></li>
+          <li><span>Tax Assessor</span><a href="tel:9725487600">(972) 548-7600</a></li>
+          <li><span>Voter Registration</span><a href="https://www.collincountytx.gov" target="_blank">Register</a></li>
+          <li><span>Collin CAD</span><a href="https://www.collincad.org" target="_blank">Property Records</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" id="events">
+    <div class="sec-h"><h2>Melissa Community Events</h2><span class="badge">2025–2026</span></div>
+    <div class="evts">
+      <div class="ev"><div class="ev-d"><div class="m">Jul</div><div class="d">4</div></div><div class="ev-info"><h4>Melissa July 4th Celebration</h4><p>Fireworks, food vendors, live entertainment · Cardinal Park · Free for all</p></div></div>
+      <div class="ev"><div class="ev-d"><div class="m">Aug</div><div class="d">16</div></div><div class="ev-info"><h4>Melissa ISD Back-to-School Bash</h4><p>Community event kicking off the new school year · Free supplies, food trucks</p></div></div>
+      <div class="ev"><div class="ev-d"><div class="m">Sep</div><div class="d">27</div></div><div class="ev-info"><h4>Cardinal Days Festival</h4><p>Melissa's annual autumn festival with live music, local vendors, and family activities</p></div></div>
+      <div class="ev"><div class="ev-d"><div class="m">Oct</div><div class="d">31</div></div><div class="ev-info"><h4>Melissa Trunk-or-Treat</h4><p>Safe Halloween celebration at city park · Costumes, candy, kids' games</p></div></div>
+      <div class="ev"><div class="ev-d"><div class="m">Dec</div><div class="d">7</div></div><div class="ev-info"><h4>Melissa Christmas Market</h4><p>Holiday market, tree lighting, Santa visits · Downtown Melissa · All ages</p></div></div>
+    </div>
+    <p style="margin-top:8px; font-size:0.74rem; color:var(--mid);">Full events calendar: <a href="https://www.cityofmelissa.com" target="_blank" style="color:var(--copper);">cityofmelissa.com</a></p>
+  </div>
+
+  <div class="sec" id="parks">
+    <div class="sec-h"><h2>Parks & Recreation</h2><span class="badge">MELISSA TX</span></div>
+    <table class="tbl">
+      <thead><tr><th>Park</th><th>Features</th><th>Location</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cardinal Park</strong></td><td>Splash Pad, Playground, Pavilion, Walking Trails</td><td>Cardinal Dr, Melissa TX</td></tr>
+        <tr><td><strong>Melissa Community Center</strong></td><td>Indoor Recreation, Meeting Rooms, Programs</td><td>3411 Barker Ave</td></tr>
+        <tr><td><strong>Melissa Athletic Fields</strong></td><td>Baseball, Soccer, Football, Concessions</td><td>Sports Complex Blvd</td></tr>
+        <tr><td><strong>Creekside Nature Area</strong></td><td>Walking/Biking Trail, Wildlife Viewing</td><td>Melissa Creek area</td></tr>
+        <tr><td><strong>Carter Park</strong></td><td>Playground, Picnic Areas, Open Field</td><td>Melissa residential area</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec" id="realestate">
+    <div class="sec-h"><h2>Real Estate & Housing</h2><span class="badge">MELISSA TX MARKET</span></div>
+    <div class="info-g">
+      <div class="icard">
+        <h3>🏠 Market Stats</h3>
+        <ul>
+          <li><span>Median Home Price</span><span class="sm">~$360,000</span></li>
+          <li><span>Median Rent</span><span class="sm">~$2,050/mo</span></li>
+          <li><span>Property Tax</span><span class="sm">~2.45% est.</span></li>
+          <li><span>YoY Growth</span><span class="sm">10%+ population</span></li>
+        </ul>
+      </div>
+      <div class="icard">
+        <h3>🔗 Housing Tools</h3>
+        <ul>
+          <li><span>Zillow</span><a href="https://www.zillow.com/melissa-tx/" target="_blank">Search Melissa</a></li>
+          <li><span>Realtor.com</span><a href="https://www.realtor.com/realestateandhomes-search/Melissa_TX" target="_blank">MLS Listings</a></li>
+          <li><span>Collin CAD</span><a href="https://www.collincad.org" target="_blank">Tax Records</a></li>
+          <li><span>New Builds</span><a href="https://www.newhomesource.com" target="_blank">New Construction</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<aside class="sidebar">
+  <div class="ad-sb">AD · 300×250<br>Display Unit</div>
+
+  <div class="sb-c">
+    <h3>⚡ Quick Links</h3>
+    <ul>
+      <li><a href="https://www.cityofmelissa.com" target="_blank">City of Melissa</a></li>
+      <li><a href="https://www.melissaisd.org" target="_blank">Melissa ISD</a></li>
+      <li><a href="https://www.collincountytx.gov" target="_blank">Collin County</a></li>
+      <li><a href="https://www.collincad.org" target="_blank">Property Tax Records</a></li>
+      <li><a href="https://511tx.org" target="_blank">TX 511 Traffic</a></li>
+      <li><a href="https://www.dps.texas.gov" target="_blank">TX DPS – DMV</a></li>
+      <li><a href="https://www.sos.state.tx.us/elections/voter/" target="_blank">TX Voter Registration</a></li>
+      <li><a href="https://www.usps.com" target="_blank">USPS Post Office</a></li>
+    </ul>
+  </div>
+
+  <div class="sb-c">
+    <h3>🗺️ Melissa, TX Map</h3>
+    <div class="map-p">
+      <span class="i">🗺️</span>
+      <span style="font-size:0.78rem;color:var(--teal);">Melissa, TX 75454</span>
+      <a href="https://maps.google.com/?q=Melissa,TX+75454" target="_blank">Open Google Maps →</a>
+    </div>
+  </div>
+
+  <div class="sb-c">
+    <h3>🏫 Melissa ISD</h3>
+    <ul>
+      <li><a href="https://www.melissaisd.org" target="_blank">District Website</a></li>
+      <li><a href="https://www.melissaisd.org" target="_blank">School Calendar</a></li>
+      <li><a href="https://www.melissaisd.org" target="_blank">Student Enrollment</a></li>
+      <li><a href="https://www.melissaisd.org" target="_blank">Athletics & Schedules</a></li>
+      <li><a href="https://www.melissaisd.org" target="_blank">Transportation</a></li>
+    </ul>
+  </div>
+
+  <div class="ad-sb">AD · 300×600<br>Half-Page Unit</div>
+
+  <div class="sb-c">
+    <h3>📰 Local News</h3>
+    <ul>
+      <li><a href="https://www.dallasnews.com" target="_blank">Dallas Morning News</a></li>
+      <li><a href="https://www.nbcdfw.com" target="_blank">NBC 5 DFW</a></li>
+      <li><a href="https://www.cbsdfw.com" target="_blank">CBS 11 Dallas</a></li>
+      <li><a href="https://www.fox4news.com" target="_blank">FOX 4 News</a></li>
+      <li><a href="https://www.ntxnews.com" target="_blank">North TX News</a></li>
+    </ul>
+  </div>
+
+  <div class="sb-c">
+    <h3>🚗 Commute & Transit</h3>
+    <ul>
+      <li><a href="https://511tx.org" target="_blank">511 TX Traffic</a></li>
+      <li><a href="https://www.ntta.org" target="_blank">NTTA Toll Roads</a></li>
+      <li><a href="https://www.dart.org" target="_blank">DART Transit</a></li>
+      <li><a href="https://waze.com" target="_blank">Waze Navigation</a></li>
+    </ul>
+  </div>
+
+  <div class="sb-c">
+    <h3>📦 Nearby Cities</h3>
+    <ul>
+      <li><a href="#" target="_blank">Anna, TX (4 mi)</a></li>
+      <li><a href="https://www.mckinneytexas.org" target="_blank">McKinney, TX (10 mi)</a></li>
+      <li><a href="#" target="_blank">Van Alstyne, TX (9 mi)</a></li>
+      <li><a href="https://www.friscotexas.gov" target="_blank">Frisco, TX (18 mi)</a></li>
+      <li><a href="https://www.plano.gov" target="_blank">Plano, TX (22 mi)</a></li>
+    </ul>
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="ft">
+    <div class="fc"><h4>Melissa TX Directory</h4><ul><li><a href="#biz">Browse Businesses</a></li><li><a href="#restaurants">Dining</a></li><li><a href="#health">Healthcare</a></li><li><a href="#schools">Schools</a></li><li><a href="#events">Events</a></li></ul></div>
+    <div class="fc"><h4>City Resources</h4><ul><li><a href="https://www.cityofmelissa.com" target="_blank">City of Melissa</a></li><li><a href="https://www.melissaisd.org" target="_blank">Melissa ISD</a></li><li><a href="#city">City Services</a></li><li><a href="#parks">Parks & Rec</a></li></ul></div>
+    <div class="fc"><h4>County & State</h4><ul><li><a href="https://www.collincountytx.gov" target="_blank">Collin County</a></li><li><a href="https://www.collincad.org" target="_blank">Property Tax</a></li><li><a href="https://www.dps.texas.gov" target="_blank">TX DMV</a></li><li><a href="https://511tx.org" target="_blank">Road Info</a></li></ul></div>
+    <div class="fc"><h4>This Directory</h4><ul><li><a href="#">List Your Business</a></li><li><a href="#">Advertise Here</a></li><li><a href="#">Update Listing</a></li><li><a href="#">Contact</a></li></ul></div>
+  </div>
+  <div class="fb">
+    <span>© 2026 Melissa TX Directory · melissaTXdirectory.com</span>
+    <span>Independent local guide · Not affiliated with the City of Melissa</span>
+  </div>
+</footer>
+
+</body>
+</html>
