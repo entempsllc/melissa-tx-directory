@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Directory Network Admin — entempsllc</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F1117;
+    --surface: #1A1D27;
+    --surface2: #222636;
+    --border: #2E3348;
+    --accent: #4F8EF7;
+    --accent2: #7C5CF7;
+    --green: #22C55E;
+    --red: #EF4444;
+    --amber: #F59E0B;
+    --text: #E8EAF0;
+    --muted: #6B7280;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* LOGIN */
+  #login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0F1117 0%, #1A1D27 100%);
+  }
+  .login-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  .login-logo { font-size: 2.5rem; margin-bottom: 12px; }
+  .login-box h1 { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+  .login-box p { font-size: 0.82rem; color: var(--muted); margin-bottom: 28px; }
+  .login-box input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+    letter-spacing: 0.2em;
+    margin-bottom: 12px;
+    outline: none;
+  }
+  .login-box input:focus { border-color: var(--accent); }
+  .login-btn {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: opacity 0.2s;
+  }
+  .login-btn:hover { opacity: 0.9; }
+  .login-error { color: var(--red); font-size: 0.8rem; margin-top: 8px; display: none; }
+
+  /* MAIN APP */
+  #app { display: none; }
+
+  /* TOPBAR */
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-brand { display: flex; align-items: center; gap: 10px; }
+  .topbar-brand .icon { font-size: 1.3rem; }
+  .topbar-brand h1 { font-size: 1rem; font-weight: 700; }
+  .topbar-brand span { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; background: var(--accent); padding: 2px 8px; border-radius: 4px; color: white; }
+  .topbar-right { display: flex; align-items: center; gap: 16px; font-size: 0.8rem; color: var(--muted); }
+  .logout-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.78rem; font-family: 'Inter', sans-serif; }
+
+  /* LAYOUT */
+  .app-body { max-width: 1400px; margin: 0 auto; padding: 28px 24px; }
+
+  /* STATS ROW */
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .stat-card .label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .stat-card .value { font-size: 2rem; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .stat-card .sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+  .v-blue { color: var(--accent); }
+  .v-amber { color: var(--amber); }
+  .v-green { color: var(--green); }
+  .v-red { color: var(--red); }
+
+  /* FILTER BAR */
+  .filter-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+  .filter-bar select, .filter-bar input {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+  }
+  .filter-bar select:focus, .filter-bar input:focus { border-color: var(--accent); }
+  .filter-bar input { flex: 1; min-width: 200px; }
+  .filter-tab { padding: 7px 14px; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--muted); transition: all 0.15s; }
+  .filter-tab.active { background: var(--accent); border-color: var(--accent); color: white; }
+
+  /* SUBMISSIONS TABLE */
+  .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .table-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .table-header h2 { font-size: 0.95rem; font-weight: 700; }
+  .table-header span { font-size: 0.75rem; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  thead th { background: var(--surface2); color: var(--muted); text-align: left; padding: 10px 16px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: var(--surface2); }
+  .biz-name { font-weight: 600; color: var(--white); margin-bottom: 2px; }
+  .biz-cat { font-size: 0.72rem; color: var(--accent); }
+  .biz-contact { font-size: 0.75rem; color: var(--muted); }
+  .site-badge { display: inline-block; font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+  .site-anna { background: rgba(92,122,92,0.2); color: #8AAB8A; }
+  .site-fate { background: rgba(28,53,87,0.4); color: #6B9FD4; }
+  .site-melissa { background: rgba(27,107,107,0.2); color: #5BC4C4; }
+  .site-leland { background: rgba(13,92,122,0.2); color: #5BB8D4; }
+  .site-fulshear { background: rgba(45,80,22,0.3); color: #8ABA5C; }
+  .status-badge { display: inline-block; font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: 700; }
+  .s-pending { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .s-approved { background: rgba(34,197,94,0.15); color: var(--green); }
+  .s-rejected { background: rgba(239,68,68,0.15); color: var(--red); }
+  .date { font-size: 0.72rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+  .actions { display: flex; gap: 6px; }
+  .btn { padding: 5px 12px; border-radius: 5px; font-size: 0.72rem; font-weight: 700; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: opacity 0.15s; }
+  .btn:hover { opacity: 0.85; }
+  .btn-approve { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+  .btn-reject { background: rgba(239,68,68,0.1); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+  .btn-delete { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+  .btn-view { background: rgba(79,142,247,0.1); color: var(--accent); border: 1px solid rgba(79,142,247,0.3); }
+
+  /* EMPTY STATE */
+  .empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+  .empty .icon { font-size: 3rem; margin-bottom: 12px; }
+  .empty h3 { font-size: 1rem; color: var(--text); margin-bottom: 6px; }
+  .empty p { font-size: 0.82rem; }
+
+  /* MODAL */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; display: none; align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px; width: 100%; max-width: 520px; }
+  .modal h3 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+  .modal-field { margin-bottom: 12px; }
+  .modal-field label { display: block; font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .modal-field p { font-size: 0.85rem; color: var(--text); background: var(--surface2); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); }
+  .modal-actions { display: flex; gap: 8px; margin-top: 20px; justify-content: flex-end; }
+
+  /* NOTIFICATION */
+  .notif { position: fixed; bottom: 24px; right: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 18px; font-size: 0.82rem; z-index: 300; display: none; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+  .notif.show { display: flex; }
+  .notif.success { border-color: var(--green); }
+  .notif.error { border-color: var(--red); }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">🗂️</div>
+    <h1>Directory Admin</h1>
+    <p>entempsllc · 5 Site Network</p>
+    <input type="password" id="pwd-input" placeholder="••••••••" maxlength="20">
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <div class="login-error" id="login-error">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-brand">
+      <span class="icon">🗂️</span>
+      <h1>Directory Admin</h1>
+      <span>entempsllc</span>
+    </div>
+    <div class="topbar-right">
+      <span id="last-updated">Loading...</span>
+      <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="app-body">
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card"><div class="label">Total Submissions</div><div class="value v-blue" id="stat-total">0</div><div class="sub">All sites combined</div></div>
+      <div class="stat-card"><div class="label">Pending Review</div><div class="value v-amber" id="stat-pending">0</div><div class="sub">Awaiting your approval</div></div>
+      <div class="stat-card"><div class="label">Approved Live</div><div class="value v-green" id="stat-approved">0</div><div class="sub">Published on sites</div></div>
+      <div class="stat-card"><div class="label">Rejected</div><div class="value v-red" id="stat-rejected">0</div><div class="sub">Declined listings</div></div>
+      <div class="stat-card"><div class="label">Sites Active</div><div class="value v-blue">5</div><div class="sub">All networks live</div></div>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filter-bar">
+      <button class="filter-tab active" onclick="filterStatus('all', this)">All</button>
+      <button class="filter-tab" onclick="filterStatus('pending', this)">⏳ Pending</button>
+      <button class="filter-tab" onclick="filterStatus('approved', this)">✅ Approved</button>
+      <button class="filter-tab" onclick="filterStatus('rejected', this)">❌ Rejected</button>
+      <select id="site-filter" onchange="renderTable()">
+        <option value="all">All Sites</option>
+        <option value="anna">annatxdirectory.com</option>
+        <option value="fate">fatetxdirectory.com</option>
+        <option value="melissa">melissatxdirectory.com</option>
+        <option value="leland">lelandncdirectory.com</option>
+        <option value="fulshear">fulsheartxdirectory.com</option>
+      </select>
+      <input type="text" id="search-input" placeholder="Search by business name, category..." oninput="renderTable()">
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrap">
+      <div class="table-header">
+        <h2>Business Submissions</h2>
+        <span id="showing-count">0 entries</span>
+      </div>
+      <div id="table-body"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detail-modal">
+  <div class="modal">
+    <h3>📋 Submission Details</h3>
+    <div id="modal-content"></div>
+    <div class="modal-actions">
+      <button class="btn btn-reject" id="modal-reject-btn">Reject</button>
+      <button class="btn btn-approve" id="modal-approve-btn">Approve & Publish</button>
+      <button class="btn btn-delete" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATION -->
+<div class="notif" id="notif">
+  <span id="notif-icon">✅</span>
+  <span id="notif-msg">Done</span>
+</div>
+
+<script>
+  const PASSWORD = '1121';
+  const STORAGE_KEY = 'dir_submissions';
+  let submissions = [];
+  let currentFilter = 'all';
+  let currentModal = null;
+
+  // ---- AUTH ----
+  function doLogin() {
+    const val = document.getElementById('pwd-input').value;
+    if (val === PASSWORD) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      loadSubmissions();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+      document.getElementById('pwd-input').value = '';
+    }
+  }
+
+  document.getElementById('pwd-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+
+  function doLogout() {
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('pwd-input').value = '';
+  }
+
+  // ---- DATA ----
+  function loadSubmissions() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    submissions = raw ? JSON.parse(raw) : getSampleData();
+    if (!raw) saveSubmissions();
+    updateStats();
+    renderTable();
+    document.getElementById('last-updated').textContent = 'Updated: ' + new Date().toLocaleTimeString();
+  }
+
+  function saveSubmissions() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(submissions));
+  }
+
+  function getSampleData() {
+    return [
+      { id: 1, site: 'anna', siteName: 'annatxdirectory.com', name: "Tony's Pizza", category: 'Restaurant', address: '123 Main St, Anna TX 75409', phone: '(972) 924-1234', email: 'tony@tonyspizza.com', website: 'tonyspizza.com', description: 'Family-owned pizza restaurant serving Anna since 2018.', status: 'pending', date: '2026-06-10' },
+      { id: 2, site: 'fate', siteName: 'fatetxdirectory.com', name: 'Fate Auto Repair', category: 'Automotive', address: '456 SH-66, Fate TX 75132', phone: '(972) 771-5555', email: 'fateauto@gmail.com', website: '', description: 'Full-service auto repair, oil changes, brakes, tires.', status: 'pending', date: '2026-06-11' },
+      { id: 3, site: 'leland', siteName: 'lelandncdirectory.com', name: 'Coastal Realty Group', category: 'Real Estate', address: '789 Village Rd, Leland NC 28451', phone: '(910) 371-8888', email: 'info@coastalrealty.com', website: 'coastalrealty.com', description: 'Leland and Brunswick County real estate specialists.', status: 'approved', date: '2026-06-09' },
+      { id: 4, site: 'fulshear', siteName: 'fulsheartxdirectory.com', name: 'Cross Creek Lawn Care', category: 'Home Services', address: 'Fulshear TX 77441', phone: '(281) 346-9999', email: 'crosscreeklawn@gmail.com', website: '', description: 'Professional lawn care and landscaping for Cross Creek Ranch.', status: 'pending', date: '2026-06-12' },
+      { id: 5, site: 'melissa', siteName: 'melissatxdirectory.com', name: 'Melissa Dance Academy', category: 'Fitness & Arts', address: '321 Cardinal Dr, Melissa TX 75454', phone: '(972) 542-7777', email: 'dance@melissadance.com', website: 'melissadance.com', description: 'Ballet, jazz, hip-hop classes for kids ages 3–18.', status: 'rejected', date: '2026-06-08' },
+    ];
+  }
+
+  // ---- STATS ----
+  function updateStats() {
+    document.getElementById('stat-total').textContent = submissions.length;
+    document.getElementById('stat-pending').textContent = submissions.filter(s => s.status === 'pending').length;
+    document.getElementById('stat-approved').textContent = submissions.filter(s => s.status === 'approved').length;
+    document.getElementById('stat-rejected').textContent = submissions.filter(s => s.status === 'rejected').length;
+  }
+
+  // ---- FILTER ----
+  function filterStatus(status, btn) {
+    currentFilter = status;
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTable();
+  }
+
+  // ---- RENDER TABLE ----
+  function renderTable() {
+    const siteFilter = document.getElementById('site-filter').value;
+    const search = document.getElementById('search-input').value.toLowerCase();
+
+    let filtered = submissions.filter(s => {
+      const matchStatus = currentFilter === 'all' || s.status === currentFilter;
+      const matchSite = siteFilter === 'all' || s.site === siteFilter;
+      const matchSearch = !search || s.name.toLowerCase().includes(search) || s.category.toLowerCase().includes(search);
+      return matchStatus && matchSite && matchSearch;
+    });
+
+    document.getElementById('showing-count').textContent = filtered.length + ' entries';
+
+    const body = document.getElementById('table-body');
+
+    if (filtered.length === 0) {
+      body.innerHTML = `<div class="empty"><div class="icon">📭</div><h3>No submissions found</h3><p>Try adjusting your filters or search.</p></div>`;
+      return;
+    }
+
+    body.innerHTML = `<table>
+      <thead><tr>
+        <th>Business</th>
+        <th>Site</th>
+        <th>Category</th>
+        <th>Contact</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr></thead>
+      <tbody>
+        ${filtered.map(s => `
+          <tr>
+            <td>
+              <div class="biz-name">${s.name}</div>
+              <div class="biz-contact">${s.address}</div>
+            </td>
+            <td><span class="site-badge site-${s.site}">${s.siteName}</span></td>
+            <td><span class="biz-cat">${s.category}</span></td>
+            <td>
+              <div class="biz-contact">${s.phone}</div>
+              <div class="biz-contact">${s.email}</div>
+            </td>
+            <td><span class="status-badge s-${s.status}">${s.status.charAt(0).toUpperCase() + s.status.slice(1)}</span></td>
+            <td><span class="date">${s.date}</span></td>
+            <td>
+              <div class="actions">
+                <button class="btn btn-view" onclick="viewDetail(${s.id})">View</button>
+                ${s.status !== 'approved' ? `<button class="btn btn-approve" onclick="updateStatus(${s.id}, 'approved')">✓</button>` : ''}
+                ${s.status !== 'rejected' ? `<button class="btn btn-reject" onclick="updateStatus(${s.id}, 'rejected')">✗</button>` : ''}
+                <button class="btn btn-delete" onclick="deleteEntry(${s.id})">🗑</button>
+              </div>
+            </td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>`;
+  }
+
+  // ---- ACTIONS ----
+  function updateStatus(id, status) {
+    submissions = submissions.map(s => s.id === id ? {...s, status} : s);
+    saveSubmissions();
+    updateStats();
+    renderTable();
+    showNotif(status === 'approved' ? '✅ Business approved and published!' : '❌ Submission rejected.', status === 'approved' ? 'success' : 'error');
+    closeModal();
+  }
+
+  function deleteEntry(id) {
+    if (!confirm('Permanently delete this submission?')) return;
+    submissions = submissions.filter(s => s.id !== id);
+    saveSubmissions();
+    updateStats();
+    renderTable();
+    showNotif('🗑️ Submission deleted.', 'error');
+  }
+
+  function viewDetail(id) {
+    const s = submissions.find(x => x.id === id);
+    if (!s) return;
+    currentModal = s;
+    document.getElementById('modal-content').innerHTML = `
+      <div class="modal-field"><label>Business Name</label><p>${s.name}</p></div>
+      <div class="modal-field"><label>Category</label><p>${s.category}</p></div>
+      <div class="modal-field"><label>Address</label><p>${s.address}</p></div>
+      <div class="modal-field"><label>Phone</label><p>${s.phone}</p></div>
+      <div class="modal-field"><label>Email</label><p>${s.email}</p></div>
+      ${s.website ? `<div class="modal-field"><label>Website</label><p>${s.website}</p></div>` : ''}
+      <div class="modal-field"><label>Description</label><p>${s.description}</p></div>
+      <div class="modal-field"><label>Submitted To</label><p>${s.siteName}</p></div>
+      <div class="modal-field"><label>Date Submitted</label><p>${s.date}</p></div>
+      <div class="modal-field"><label>Current Status</label><p><span class="status-badge s-${s.status}">${s.status}</span></p></div>
+    `;
+    document.getElementById('modal-approve-btn').onclick = () => updateStatus(s.id, 'approved');
+    document.getElementById('modal-reject-btn').onclick = () => updateStatus(s.id, 'rejected');
+    document.getElementById('detail-modal').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('detail-modal').classList.remove('open');
+  }
+
+  document.getElementById('detail-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // ---- NOTIFICATION ----
+  function showNotif(msg, type) {
+    const notif = document.getElementById('notif');
+    document.getElementById('notif-msg').textContent = msg;
+    notif.className = 'notif show ' + type;
+    setTimeout(() => notif.className = 'notif', 3000);
+  }
+
+  // ---- NEW SUBMISSION LISTENER (from forms on same browser) ----
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'new_submission') {
+      const newEntry = JSON.parse(e.newValue);
+      if (newEntry) {
+        submissions.unshift(newEntry);
+        saveSubmissions();
+        updateStats();
+        renderTable();
+        showNotif('🆕 New submission from ' + newEntry.siteName, 'success');
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

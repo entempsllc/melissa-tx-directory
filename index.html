@@ -135,6 +135,25 @@
   .fc ul li a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.77rem; }
   .fc ul li a:hover { color: var(--copper); }
   .fb { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; display: flex; justify-content: space-between; font-size: 0.71rem; flex-wrap: wrap; gap: 6px; }
+
+.submit-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:999;display:none;align-items:center;justify-content:center;padding:20px}
+.submit-modal-overlay.open{display:flex}
+.submit-modal{background:white;border-radius:12px;padding:32px 28px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.submit-modal h2{font-size:1.2rem;font-weight:700;margin-bottom:4px}
+.sub-note{font-size:0.82rem;color:#666;margin-bottom:20px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#444;margin-bottom:5px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 12px;border:1.5px solid #D0D5DD;border-radius:6px;font-size:0.88rem;font-family:inherit;outline:none;color:#1A1A1A}
+.form-group textarea{resize:vertical;min-height:80px}
+.req{color:#DC2626}
+.submit-form-btn{width:100%;padding:13px;border:none;border-radius:8px;font-size:0.92rem;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px;color:white}
+.form-cancel{width:100%;padding:10px;border:1.5px solid #D0D5DD;border-radius:8px;background:white;font-size:0.85rem;cursor:pointer;font-family:inherit;margin-top:8px;color:#666}
+.form-success{display:none;text-align:center;padding:20px 0}
+.s-icon{font-size:3rem;margin-bottom:12px}
+.form-success h3{font-size:1.1rem;font-weight:700;margin-bottom:6px}
+.form-success p{font-size:0.82rem;color:#666;line-height:1.5}
+
 </style>
 </head>
 <body>
@@ -441,7 +460,7 @@
     <div class="fc"><h4>Melissa TX Directory</h4><ul><li><a href="#biz">Browse Businesses</a></li><li><a href="#restaurants">Dining</a></li><li><a href="#health">Healthcare</a></li><li><a href="#schools">Schools</a></li><li><a href="#events">Events</a></li></ul></div>
     <div class="fc"><h4>City Resources</h4><ul><li><a href="https://www.cityofmelissa.com" target="_blank">City of Melissa</a></li><li><a href="https://www.melissaisd.org" target="_blank">Melissa ISD</a></li><li><a href="#city">City Services</a></li><li><a href="#parks">Parks & Rec</a></li></ul></div>
     <div class="fc"><h4>County & State</h4><ul><li><a href="https://www.collincountytx.gov" target="_blank">Collin County</a></li><li><a href="https://www.collincad.org" target="_blank">Property Tax</a></li><li><a href="https://www.dps.texas.gov" target="_blank">TX DMV</a></li><li><a href="https://511tx.org" target="_blank">Road Info</a></li></ul></div>
-    <div class="fc"><h4>This Directory</h4><ul><li><a href="#">List Your Business</a></li><li><a href="#">Advertise Here</a></li><li><a href="#">Update Listing</a></li><li><a href="#">Contact</a></li></ul></div>
+    <div class="fc"><h4>This Directory</h4><ul><li><a href="#" onclick="openSubmitForm(); return false;">Submit Your Business</a></li><li><a href="#">Advertise Here</a></li><li><a href="#">Update Listing</a></li><li><a href="#">Contact</a></li></ul></div>
   </div>
   <div class="fb">
     <span>© 2026 Melissa TX Directory · melissaTXdirectory.com</span>
@@ -449,5 +468,56 @@
   </div>
 </footer>
 
+
+<div class="submit-modal-overlay" id="submit-overlay">
+  <div class="submit-modal">
+    <div id="form-content">
+      <h2>📋 Submit Your Business</h2>
+      <p class="sub-note">Free listing · Reviewed within 48 hours · info@entempsllc.com</p>
+      <div class="form-row">
+        <div class="form-group"><label>Business Name <span class="req">*</span></label><input type="text" id="f-name" placeholder="Your Business Name"></div>
+        <div class="form-group"><label>Category <span class="req">*</span></label><select id="f-cat"><option value="">Select category...</option><option>Restaurant / Food</option><option>Healthcare / Medical</option><option>Home Services / Contractors</option><option>Automotive</option><option>Real Estate</option><option>Childcare / Education</option><option>Fitness / Wellness</option><option>Beauty / Salon</option><option>Pet Services</option><option>Banking / Finance</option><option>Retail / Shopping</option><option>Church / Non-Profit</option><option>Professional Services</option><option>Other</option></select></div>
+      </div>
+      <div class="form-group"><label>Street Address <span class="req">*</span></label><input type="text" id="f-addr" placeholder="123 Main St, City TX 75000"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Phone <span class="req">*</span></label><input type="tel" id="f-phone" placeholder="(555) 555-5555"></div>
+        <div class="form-group"><label>Email <span class="req">*</span></label><input type="email" id="f-email" placeholder="you@business.com"></div>
+      </div>
+      <div class="form-group"><label>Website (optional)</label><input type="text" id="f-web" placeholder="www.yourbusiness.com"></div>
+      <div class="form-group"><label>Description <span class="req">*</span></label><textarea id="f-desc" placeholder="Tell us about your business, services, and hours..."></textarea></div>
+      <button class="submit-form-btn" onclick="submitBusiness()">Submit for Review</button>
+      <button class="form-cancel" onclick="closeSubmitForm()">Cancel</button>
+    </div>
+    <div class="form-success" id="form-success">
+      <div class="s-icon">🎉</div>
+      <h3>Submission Received!</h3>
+      <p>Thank you! We will review your listing within 48 hours.<br>Questions? Email <strong>info@entempsllc.com</strong></p>
+      <button class="submit-form-btn" onclick="closeSubmitForm()" style="margin-top:20px;">Close</button>
+    </div>
+  </div>
+</div>
+<script>
+const SITE_KEY="melissa";
+const SITE_NAME="melissatxdirectory.com";
+function openSubmitForm(){document.getElementById("submit-overlay").classList.add("open");document.getElementById("form-content").style.display="block";document.getElementById("form-success").style.display="none";}
+function closeSubmitForm(){document.getElementById("submit-overlay").classList.remove("open");["f-name","f-cat","f-addr","f-phone","f-email","f-web","f-desc"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});}
+document.getElementById("submit-overlay").addEventListener("click",function(e){if(e.target===this)closeSubmitForm();});
+function submitBusiness(){
+  const name=document.getElementById("f-name").value.trim();
+  const cat=document.getElementById("f-cat").value;
+  const addr=document.getElementById("f-addr").value.trim();
+  const phone=document.getElementById("f-phone").value.trim();
+  const email=document.getElementById("f-email").value.trim();
+  const web=document.getElementById("f-web").value.trim();
+  const desc=document.getElementById("f-desc").value.trim();
+  if(!name||!cat||!addr||!phone||!email||!desc){alert("Please fill in all required fields.");return;}
+  const entry={id:Date.now(),site:SITE_KEY,siteName:SITE_NAME,name,category:cat,address:addr,phone,email,website:web,description:desc,status:"pending",date:new Date().toISOString().split("T")[0]};
+  const existing=JSON.parse(localStorage.getItem("dir_submissions")||"[]");
+  existing.unshift(entry);
+  localStorage.setItem("dir_submissions",JSON.stringify(existing));
+  document.getElementById("form-content").style.display="none";
+  document.getElementById("form-success").style.display="block";
+}
+<\/script>
 </body>
 </html>
