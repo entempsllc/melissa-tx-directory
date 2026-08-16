@@ -59,6 +59,13 @@ class SearchIdentityContract(unittest.TestCase):
         robots = (ROOT / "robots.txt").read_text(encoding="utf-8").lower()
         self.assertNotIn("disallow: /admin.html", robots)
 
+    def test_homepage_does_not_claim_business_verification_or_google_backing(self):
+        homepage = (ROOT / "index.html").read_text(encoding="utf-8").lower()
+        self.assertNotIn("verified local businesses", homepage)
+        self.assertNotIn("powered by google", homepage)
+        self.assertIn("local business listings", homepage)
+        self.assertIn("independent directory", homepage)
+
 
 if __name__ == "__main__":
     unittest.main()
