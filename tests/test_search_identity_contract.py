@@ -66,6 +66,14 @@ class SearchIdentityContract(unittest.TestCase):
         self.assertIn("local business listings", homepage)
         self.assertIn("independent directory", homepage)
 
+    def test_featured_listing_inquiry_uses_public_contact_email(self):
+        homepage = (ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn('>Advertise Here</a>', homepage)
+        self.assertIn(
+            '<a href="mailto:info@entempsllc.com?subject=Melissa%20TX%20Directory%20Featured%20Listing%20%26%20Sponsorship%20Inquiry">Featured Listing &amp; Sponsorship Inquiry</a>',
+            homepage,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
