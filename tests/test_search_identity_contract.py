@@ -69,9 +69,16 @@ class SearchIdentityContract(unittest.TestCase):
     def test_featured_listing_inquiry_uses_public_contact_email(self):
         homepage = (ROOT / "index.html").read_text(encoding="utf-8")
         self.assertNotIn('>Advertise Here</a>', homepage)
+        self.assertIn('<a href="advertising.html">Featured Listing &amp; Sponsorship Inquiry</a>', homepage)
+
+    def test_advertising_page_sets_truthful_offer_boundaries(self):
+        page = (ROOT / "advertising.html").read_text(encoding="utf-8")
+        self.assertIn("Featured Listings &amp; Local Sponsorships", page)
+        self.assertIn("Paid placements will be clearly labeled", page)
+        self.assertIn("We do not guarantee impressions, clicks, leads, rankings, or sales", page)
         self.assertIn(
-            '<a href="mailto:info@entempsllc.com?subject=Melissa%20TX%20Directory%20Featured%20Listing%20%26%20Sponsorship%20Inquiry">Featured Listing &amp; Sponsorship Inquiry</a>',
-            homepage,
+            "mailto:info@entempsllc.com?subject=Melissa%20TX%20Directory%20Advertising%20Page%20Inquiry",
+            page,
         )
 
 
